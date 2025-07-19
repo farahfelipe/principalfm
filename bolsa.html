@@ -3,112 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FM Fisioterapia e Saúde | Mercado Financeiro</title>
+  <title>FM Fisioterapia e Saúde</title>
   <style>
     body {
       background-color: #0f172a;
       color: #f8f9fa;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", sans-serif;
       margin: 0;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      padding: 20px;
     }
 
     h1 {
-      font-size: 2.8em;
-      margin-bottom: 10px;
+      text-align: center;
+      font-size: 3em; /* maior */
       color: #ffffff;
+      margin-bottom: 10px;
     }
 
     h2 {
-      font-size: 2em;
+      margin-top: 40px;
+      font-size: 2em; /* maior */
+      border-bottom: 2px solid #38bdf8;
+      padding-bottom: 5px;
       color: #38bdf8;
-      margin: 40px 0 20px 0;
-      border-bottom: 3px solid #38bdf8;
-      padding-bottom: 8px;
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
+      text-align: center;
     }
 
     .grid {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      max-width: 900px;
-      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
     }
 
-    .tv-widget {
-      width: 280px !important;
-      height: 320px !important;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    iframe {
+      width: 100%;
+      height: 350px; /* um pouco maior */
+      border: none;
+      border-radius: 10px;
       background-color: #1e293b;
+      font-size: 1.3em;
     }
 
     footer {
-      margin-top: auto;
-      background-color: #1e293b;
-      padding: 12px 20px;
-      font-size: 1.2em;
-      color: #facc15;
-      border-top: 2px solid #facc15;
-      width: 100%;
-      text-align: center;
       position: fixed;
       bottom: 0;
       left: 0;
+      width: 100%;
+      background-color: #1e293b;
+      color: #facc15;
+      border-top: 2px solid #facc15;
+      padding: 12px 0;
+      font-size: 1.3em;
+      text-align: center;
+      font-weight: 600;
+      z-index: 1000;
     }
   </style>
 </head>
 <body>
-
   <h1>📊 Mercado Financeiro | FM Fisioterapia e Saúde</h1>
 
   <h2>📈 Bolsas de Valores</h2>
   <div class="grid">
-    <div id="ibov" class="tv-widget"></div>
-    <div id="nasdaq" class="tv-widget"></div>
-    <div id="dowjones" class="tv-widget"></div>
+    <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=br#%7B%22symbol%22%3A%22BMFBOVESPA%3AIBOV%22%2C%22colorTheme%22%3A%22dark%22%7D"></iframe>
+    <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=br#%7B%22symbol%22%3A%22NASDAQ%3ANDX%22%2C%22colorTheme%22%3A%22dark%22%7D"></iframe>
+    <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=br#%7B%22symbol%22%3A%22DJI%22%2C%22colorTheme%22%3A%22dark%22%7D"></iframe>
   </div>
 
   <h2>💱 Cotações de Moedas</h2>
   <div class="grid">
-    <div id="usdbrl" class="tv-widget"></div>
-    <div id="eurbrl" class="tv-widget"></div>
+    <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=br#%7B%22symbol%22%3A%22FX_IDC%3AUSDBRL%22%2C%22colorTheme%22%3A%22dark%22%7D"></iframe>
+    <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=br#%7B%22symbol%22%3A%22FX_IDC%3AEURBRL%22%2C%22colorTheme%22%3A%22dark%22%7D"></iframe>
   </div>
 
   <footer>
     Clínica FM Fisioterapia e Saúde
   </footer>
-
-  <script src="https://s3.tradingview.com/tv.js"></script>
-  <script>
-    function createMiniWidget(containerId, symbol) {
-      new TradingView.MiniWidget({
-        container_id: containerId,
-        symbol: symbol,
-        locale: "br",
-        colorTheme: "dark",
-        autosize: true
-      });
-    }
-
-    createMiniWidget("ibov", "BMFBOVESPA:IBOV");
-    createMiniWidget("nasdaq", "NASDAQ:NDX");
-    createMiniWidget("dowjones", "DJI");
-
-    createMiniWidget("usdbrl", "FX_IDC:USDBRL");
-    createMiniWidget("eurbrl", "FX_IDC:EURBRL");
-  </script>
-
 </body>
 </html>
-
