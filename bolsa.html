@@ -3,109 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FM Fisioterapia e Saúde - Bolsa</title>
+  <title>FM Fisioterapia e Saúde | Mercado Financeiro</title>
   <style>
     body {
       background-color: #0f172a;
       color: #f8f9fa;
-      font-family: "Segoe UI", sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 20px 20px 70px 20px;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
+
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
+      font-size: 2.8em;
+      margin-bottom: 10px;
       color: #ffffff;
     }
+
     h2 {
-      font-size: 1.8em;
-      margin-top: 40px;
-      border-bottom: 2px solid #38bdf8;
-      padding-bottom: 5px;
+      font-size: 2em;
       color: #38bdf8;
+      margin: 40px 0 20px 0;
+      border-bottom: 3px solid #38bdf8;
+      padding-bottom: 8px;
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .quotes {
+
+    .grid {
       display: flex;
       justify-content: center;
       gap: 30px;
       flex-wrap: wrap;
-      margin-top: 30px;
+      max-width: 900px;
+      margin: 0 auto;
     }
+
     .tv-widget {
-      width: 200px !important;
-      height: 220px !important;
+      width: 280px !important;
+      height: 320px !important;
       border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 15px #0ea5e9;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
       background-color: #1e293b;
-      font-size: 1.3em;
     }
-    .bottom-bar {
+
+    footer {
+      margin-top: auto;
+      background-color: #1e293b;
+      padding: 12px 20px;
+      font-size: 1.2em;
+      color: #facc15;
+      border-top: 2px solid #facc15;
+      width: 100%;
+      text-align: center;
       position: fixed;
       bottom: 0;
       left: 0;
-      width: 100%;
-      background-color: #00796b;
-      color: #fff;
-      text-align: center;
-      padding: 12px 0;
-      font-size: 1.3em;
-      font-weight: 600;
-      box-shadow: 0 -2px 6px rgba(0,0,0,0.25);
-      z-index: 9999;
     }
   </style>
 </head>
 <body>
+
   <h1>📊 Mercado Financeiro | FM Fisioterapia e Saúde</h1>
 
   <h2>📈 Bolsas de Valores</h2>
-  <div class="quotes">
-    <!-- IBOV -->
-    <div class="tv-widget" id="ibov-widget"></div>
-    <!-- NASDAQ -->
-    <div class="tv-widget" id="nasdaq-widget"></div>
-    <!-- DOW JONES -->
-    <div class="tv-widget" id="dow-widget"></div>
+  <div class="grid">
+    <div id="ibov" class="tv-widget"></div>
+    <div id="nasdaq" class="tv-widget"></div>
+    <div id="dowjones" class="tv-widget"></div>
   </div>
 
   <h2>💱 Cotações de Moedas</h2>
-  <div class="quotes">
-    <!-- Dólar -->
-    <div class="tv-widget" id="usdbrl-widget"></div>
-    <!-- Euro -->
-    <div class="tv-widget" id="eurbrl-widget"></div>
+  <div class="grid">
+    <div id="usdbrl" class="tv-widget"></div>
+    <div id="eurbrl" class="tv-widget"></div>
   </div>
 
-  <div class="bottom-bar">
+  <footer>
     Clínica FM Fisioterapia e Saúde
-  </div>
+  </footer>
 
-  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script src="https://s3.tradingview.com/tv.js"></script>
   <script>
-    function createWidget(containerId, symbol) {
+    function createMiniWidget(containerId, symbol) {
       new TradingView.MiniWidget({
         container_id: containerId,
         symbol: symbol,
         locale: "br",
-        dateRange: "12M",
         colorTheme: "dark",
-        trendLineColor: "#37a6ef",
-        underLineColor: "rgba(55, 166, 239, 0.15)",
-        isTransparent: false,
-        autosize: true,
-        largeChartUrl: "",
+        autosize: true
       });
     }
 
-    // Símbolos TradingView para os widgets
-    createWidget("ibov-widget", "BMFBOVESPA:IBOV");
-    createWidget("nasdaq-widget", "NASDAQ:NDX");
-    createWidget("dow-widget", "DJI");
-    createWidget("usdbrl-widget", "FX_IDC:USDBRL");
-    createWidget("eurbrl-widget", "FX_IDC:EURBRL");
+    createMiniWidget("ibov", "BMFBOVESPA:IBOV");
+    createMiniWidget("nasdaq", "NASDAQ:NDX");
+    createMiniWidget("dowjones", "DJI");
+
+    createMiniWidget("usdbrl", "FX_IDC:USDBRL");
+    createMiniWidget("eurbrl", "FX_IDC:EURBRL");
   </script>
+
 </body>
 </html>
 
