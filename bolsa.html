@@ -10,89 +10,90 @@
       color: #f8f9fa;
       font-family: "Segoe UI", sans-serif;
       margin: 0;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 20px;
       box-sizing: border-box;
     }
 
     h1 {
       text-align: center;
-      font-size: 3em;
+      font-size: 2.8em;
       color: #ffffff;
       margin-bottom: 20px;
     }
 
     h2 {
-      margin-top: 30px;
+      margin-top: 40px;
       font-size: 2em;
       border-bottom: 2px solid #38bdf8;
       padding-bottom: 5px;
       color: #38bdf8;
       text-align: center;
-      width: 100%;
-      max-width: 1600px;
     }
 
     .grid {
-      width: 95%;
-      max-width: 1600px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       gap: 20px;
       margin-top: 20px;
+      justify-items: center;
     }
 
     iframe {
       width: 100%;
-      height: 40vh; /* Ajusta altura proporcional à tela */
+      height: 300px;
       border: none;
       border-radius: 10px;
       background-color: #1e293b;
+      max-width: 400px;
     }
 
     footer {
-      margin-top: 20px;
+      margin-top: 40px;
       text-align: center;
-      font-size: 1.5em;
+      font-size: 1.3em;
       padding: 10px;
       background-color: #1e293b;
       color: #facc15;
       border-top: 2px solid #facc15;
-      width: 100%;
+      position: relative;
     }
 
-    /* Barra inferior rolante */
-    .ticker-bar {
+    /* Barra inferior animada */
+    .marquee {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #facc15;
-      color: #0f172a;
-      font-weight: bold;
-      padding: 10px;
-      font-size: 1.4em;
+      background-color: #1e293b;
+      color: #facc15;
+      font-size: 1.5em;
+      padding: 10px 0;
       white-space: nowrap;
       overflow: hidden;
+      box-sizing: border-box;
+      border-top: 2px solid #facc15;
     }
 
-    .ticker-bar span {
+    .marquee span {
       display: inline-block;
       padding-left: 100%;
-      animation: ticker 20s linear infinite;
+      animation: marquee 12s linear infinite;
     }
 
-    @keyframes ticker {
+    @keyframes marquee {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
-    @media (max-width: 768px) {
-      h1 { font-size: 2em; }
-      h2 { font-size: 1.5em; }
-      iframe { height: 50vh; }
+    /* Responsividade para TVs 720p */
+    @media (max-width: 1280px) {
+      h1 { font-size: 2.4em; }
+      h2 { font-size: 1.6em; }
+      iframe { height: 250px; }
+      .grid {
+        grid-template-columns: 1fr; /* Coloca uma coluna apenas */
+        gap: 15px;
+      }
     }
   </style>
 </head>
@@ -112,10 +113,13 @@
     <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=br#%7B%22symbol%22%3A%22FX_IDC%3AEURBRL%22%2C%22colorTheme%22%3A%22dark%22%7D"></iframe>
   </div>
 
-  <footer>FM Fisioterapia e Saúde – Saúde com propósito!</footer>
+  <footer>
+    FM Fisioterapia e Saúde – Saúde com propósito!
+  </footer>
 
-  <div class="ticker-bar">
-    <span>Clínica FM Fisioterapia e Saúde.</span>
+  <div class="marquee">
+    <span>Clínica FM Fisioterapia e Saúde – Cuidando de você com excelência.</span>
   </div>
 </body>
 </html>
+
