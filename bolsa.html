@@ -2,135 +2,79 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FM Fisioterapia e Saúde</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cotações - FM Fisioterapia e Saúde</title>
   <style>
-    :root {
-      --primary-color: #00796b;
-      --secondary-color: #004d40;
-      --accent-color: #fbc02d;
-      --bg-color: #f5f5f5;
-      --card-bg: #ffffff;
-      --text-color: #333;
-    }
-
     body {
+      background-color: #0f172a;
+      color: #f8f9fa;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
       padding: 20px;
+      text-align: center;
     }
-
     h1 {
-      text-align: center;
-      font-size: 3em;
-      color: var(--primary-color);
-      margin-bottom: 20px;
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      color: #38bdf8;
     }
-
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
     }
-
-    .card {
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .card h2 {
-      font-size: 2em;
-      color: var(--secondary-color);
-      margin-bottom: 15px;
-    }
-
-    .value {
-      font-size: 2.5em;
-      font-weight: bold;
-      color: var(--accent-color);
-    }
-
-    footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 1.3em;
+    .widget {
+      background-color: #1e293b;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      width: 320px;
       padding: 15px;
-      background-color: var(--primary-color);
-      color: #fff;
+    }
+    .widget h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.8rem;
+      color: #facc15;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 260px;
       border-radius: 10px;
+    }
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .widget {
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>📊 Mercado Financeiro | FM Fisioterapia e Saúde</h1>
 
-  <div class="dashboard">
-    <div class="card">
-      <h2>IBOVESPA</h2>
-      <div class="value" id="ibov">Carregando...</div>
+  <h1>📈 Cotações em Tempo Real</h1>
+
+  <div class="container">
+
+    <div class="widget">
+      <h2>IBOVESPA (IBOV)</h2>
+      <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_ibov&symbol=BMFBOVESPA:IBOV&interval=D&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&withdateranges=1&hidevolume=1&hidelegend=1&hideideas=1"></iframe>
     </div>
-    <div class="card">
-      <h2>NASDAQ</h2>
-      <div class="value" id="nasdaq">Carregando...</div>
+
+    <div class="widget">
+      <h2>NASDAQ (NDX)</h2>
+      <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_ndx&symbol=NASDAQ:NDX&interval=D&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&withdateranges=1&hidevolume=1&hidelegend=1&hideideas=1"></iframe>
     </div>
-    <div class="card">
-      <h2>Dow Jones</h2>
-      <div class="value" id="dowjones">Carregando...</div>
+
+    <div class="widget">
+      <h2>DOW JONES (DJI)</h2>
+      <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_dji&symbol=DJI&interval=D&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&withdateranges=1&hidevolume=1&hidelegend=1&hideideas=1"></iframe>
     </div>
-    <div class="card">
-      <h2>Dólar</h2>
-      <div class="value">R$ <span id="dolar">Carregando...</span></div>
-    </div>
-    <div class="card">
-      <h2>Euro</h2>
-      <div class="value">R$ <span id="euro">Carregando...</span></div>
-    </div>
+
   </div>
 
-  <footer>
-    FM Fisioterapia e Saúde – Saúde com propósito!
-  </footer>
-
-  <script>
-    async function carregarCotacoes() {
-      try {
-        // Cotação Dólar e Euro
-        const moedas = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL")
-          .then(res => res.json());
-
-        document.getElementById("dolar").textContent = parseFloat(moedas.USDBRL.bid).toFixed(2);
-        document.getElementById("euro").textContent = parseFloat(moedas.EURBRL.bid).toFixed(2);
-
-        // Cotações de IBOV, NASDAQ e DOW JONES (Yahoo Finance)
-        const yahoo = await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols=^BVSP,^IXIC,^DJI")
-          .then(res => res.json());
-
-        const ibov = yahoo.quoteResponse.result.find(item => item.symbol === "^BVSP");
-        const nasdaq = yahoo.quoteResponse.result.find(item => item.symbol === "^IXIC");
-        const dow = yahoo.quoteResponse.result.find(item => item.symbol === "^DJI");
-
-        document.getElementById("ibov").textContent = `${ibov.regularMarketPrice.toLocaleString('pt-BR')} pts`;
-        document.getElementById("nasdaq").textContent = `${nasdaq.regularMarketPrice.toLocaleString('pt-BR')} pts`;
-        document.getElementById("dowjones").textContent = `${dow.regularMarketPrice.toLocaleString('pt-BR')} pts`;
-
-      } catch (error) {
-        console.error("Erro ao carregar cotações:", error);
-      }
-    }
-
-    carregarCotacoes();
-    setInterval(carregarCotacoes, 300000); // Atualiza a cada 5 minutos
-  </script>
 </body>
 </html>
