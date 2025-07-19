@@ -25,38 +25,21 @@
       padding-bottom: 5px;
       color: #38bdf8;
     }
-    .quote-container {
+    .quotes {
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 30px;
       flex-wrap: wrap;
       margin-top: 30px;
     }
-    .quote {
+    .tv-widget {
+      width: 200px !important;
+      height: 220px !important;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px #0ea5e9;
       background-color: #1e293b;
-      border-radius: 10px;
-      padding: 20px;
-      min-width: 180px;
-      box-shadow: 0 0 10px #0ea5e9;
-    }
-    .quote h3 {
-      font-size: 1.6em;
-      margin-bottom: 10px;
-      color: #38bdf8;
-    }
-    .price {
-      font-size: 2.4em;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .change {
-      font-size: 1.5em;
-    }
-    .positive {
-      color: #22c55e;
-    }
-    .negative {
-      color: #ef4444;
+      font-size: 1.3em;
     }
     .bottom-bar {
       position: fixed;
@@ -78,132 +61,51 @@
   <h1>📊 Mercado Financeiro | FM Fisioterapia e Saúde</h1>
 
   <h2>📈 Bolsas de Valores</h2>
-  <div class="quote-container" id="stock-quotes">
-    <!-- Dados carregados aqui -->
+  <div class="quotes">
+    <!-- IBOV -->
+    <div class="tv-widget" id="ibov-widget"></div>
+    <!-- NASDAQ -->
+    <div class="tv-widget" id="nasdaq-widget"></div>
+    <!-- DOW JONES -->
+    <div class="tv-widget" id="dow-widget"></div>
   </div>
 
   <h2>💱 Cotações de Moedas</h2>
-  <div class="quote-container" id="currency-quotes">
-    <!-- Dados carregados aqui -->
+  <div class="quotes">
+    <!-- Dólar -->
+    <div class="tv-widget" id="usdbrl-widget"></div>
+    <!-- Euro -->
+    <div class="tv-widget" id="eurbrl-widget"></div>
   </div>
 
   <div class="bottom-bar">
     Clínica FM Fisioterapia e Saúde
   </div>
 
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
   <script>
-    // Símbolos usados para a API
-    const stocks = [
-      { symbol: '^BVSP', name: 'IBOV' },       // IBOVESPA
-      { symbol: '^IXIC', name: 'NASDAQ' },     // Nasdaq Composite
-      { symbol: '^DJI', name: 'Dow Jones' },   // Dow Jones
-    ];
-
-    const currencies = [
-      { symbol: 'USDBRL', name: 'Dólar / Real' },
-      { symbol: 'EURBRL', name: 'Euro / Real' },
-    ];
-
-    // Função para formatar valor com 2 casas decimais e vírgula
-    function formatPrice(value) {
-      return value.toFixed(2).replace('.', ',');
+    function createWidget(containerId, symbol) {
+      new TradingView.MiniWidget({
+        container_id: containerId,
+        symbol: symbol,
+        locale: "br",
+        dateRange: "12M",
+        colorTheme: "dark",
+        trendLineColor: "#37a6ef",
+        underLineColor: "rgba(55, 166, 239, 0.15)",
+        isTransparent: false,
+        autosize: true,
+        largeChartUrl: "",
+      });
     }
 
-    // Função para criar card com dados
-    function createQuoteCard(name, price, change) {
-      const div = document.createElement('div');
-      div.className = 'quote';
-
-      const changeClass = change >= 0 ? 'positive' : 'negative';
-      const sign = change >= 0 ? '+' : '';
-
-      div.innerHTML = `
-        <h3>${name}</h3>
-        <div class="price">${formatPrice(price)}</div>
-        <div class="change ${changeClass}">${sign}${formatPrice(change)}</div>
-      `;
-      return div;
-    }
-
-    // Puxar dados bolsa
-    async function fetchStockData() {
-      const container = document.getElementById('stock-quotes');
-      container.innerHTML = 'Carregando...';
-
-      // A API do Financial Modeling Prep usa symbol simples, alguns símbolos com "^" devem ser adaptados
-      // Para IBOV e outros índices brasileiros, pode não ter dados na API gratuita.
-      // Para este exemplo, vamos usar '^BVSP' como IBOV e '^IXIC' e '^DJI' para US
-
-      // Financial Modeling Prep usa símbolos como: ^BVSP, ^IXIC e ^DJI normalmente, porém API gratuita não cobre índice brasileiro.
-      // Alternativa: pegar IBOV pelo símbolo ^BVSP do Yahoo, mas para este script, vamos usar dados para US.
-
-      // Para este exemplo, usaremos IBOV como BOVA11 (ETF da bolsa brasileira), símbolo BOVA11 no mercado.
-
-      try {
-        container.innerHTML = '';
-
-        // IBOV (como BOVA11)
-        let res = await fetch('https://financialmodelingprep.com/api/v3/quote/BOVA11?apikey=demo');
-        let data = await res.json();
-        if (data.length > 0) {
-          const d = data[0];
-          container.appendChild(createQuoteCard('IBOV (BOVA11)', d.price, d.change));
-        }
-
-        // NASDAQ
-        res = await fetch('https://financialmodelingprep.com/api/v3/quote/IXIC?apikey=demo');
-        data = await res.json();
-        if (data.length > 0) {
-          const d = data[0];
-          container.appendChild(createQuoteCard('NASDAQ', d.price, d.change));
-        }
-
-        // DOW JONES
-        res = await fetch('https://financialmodelingprep.com/api/v3/quote/DJI?apikey=demo');
-        data = await res.json();
-        if (data.length > 0) {
-          const d = data[0];
-          container.appendChild(createQuoteCard('DOW JONES', d.price, d.change));
-        }
-
-      } catch (e) {
-        container.innerHTML = 'Erro ao carregar dados das bolsas.';
-        console.error(e);
-      }
-    }
-
-    // Puxar dados moedas
-    async function fetchCurrencyData() {
-      const container = document.getElementById('currency-quotes');
-      container.innerHTML = 'Carregando...';
-
-      try {
-        container.innerHTML = '';
-
-        // USD/BRL
-        let res = await fetch('https://financialmodelingprep.com/api/v3/quote/USDBRL?apikey=demo');
-        let data = await res.json();
-        if (data.length > 0) {
-          const d = data[0];
-          container.appendChild(createQuoteCard('Dólar / Real', d.price, d.change));
-        }
-
-        // EUR/BRL
-        res = await fetch('https://financialmodelingprep.com/api/v3/quote/EURBRL?apikey=demo');
-        data = await res.json();
-        if (data.length > 0) {
-          const d = data[0];
-          container.appendChild(createQuoteCard('Euro / Real', d.price, d.change));
-        }
-
-      } catch (e) {
-        container.innerHTML = 'Erro ao carregar dados das moedas.';
-        console.error(e);
-      }
-    }
-
-    fetchStockData();
-    fetchCurrencyData();
+    // Símbolos TradingView para os widgets
+    createWidget("ibov-widget", "BMFBOVESPA:IBOV");
+    createWidget("nasdaq-widget", "NASDAQ:NDX");
+    createWidget("dow-widget", "DJI");
+    createWidget("usdbrl-widget", "FX_IDC:USDBRL");
+    createWidget("eurbrl-widget", "FX_IDC:EURBRL");
   </script>
 </body>
 </html>
+
