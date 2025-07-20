@@ -10,75 +10,85 @@
       color: #f8f9fa;
       font-family: "Segoe UI", sans-serif;
       margin: 0;
-      padding: 0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      padding: 20px;
     }
 
-    header {
+    h1 {
       text-align: center;
-      padding: 5px 0;
-      font-size: 2em;
+      font-size: 2.5em;
       color: #ffffff;
-      background-color: #1e293b;
+      margin-bottom: 10px;
+    }
+
+    .content > div {
+      margin-bottom: 10px; /* espaço entre blocos menor */
     }
 
     h2 {
       font-size: 1.4em;
       color: #38bdf8;
-      margin: 10px 0 5px 0; /* Menos espaço entre título e conteúdo */
+      margin: 8px 0 4px 0;
       text-align: center;
-    }
-
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 0 10px;
-      gap: 10px; /* Reduz espaço entre seções */
+      border-bottom: 2px solid #38bdf8;
+      padding-bottom: 5px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 8px; /* menor gap entre iframes */
+      margin-top: 10px;
+      justify-items: center;
     }
 
     iframe {
       width: 100%;
-      height: 150px;
+      max-width: 360px;
+      height: 280px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background-color: #1e293b;
     }
 
-    .marquee {
-      background: #1e293b;
-      color: #facc15;
-      padding: 8px 0;
+    footer {
+      margin-top: 40px;
+      text-align: center;
       font-size: 1.2em;
-      white-space: nowrap;
-      overflow: hidden;
-      position: relative;
+      padding: 10px;
+      background-color: #1e293b;
+      color: #facc15;
+      border-top: 2px solid #facc15;
     }
 
-    .marquee span {
+    /* Barra animada no rodapé */
+    #footer-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #1e293b;
+      color: #facc15;
+      font-size: 1.1em;
+      padding: 8px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    #footer-text {
       display: inline-block;
       padding-left: 100%;
-      animation: scroll 15s linear infinite;
+      animation: scroll-text 20s linear infinite;
     }
 
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-100%); }
+    @keyframes scroll-text {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
+
   </style>
 </head>
 <body>
-  <header>📊 Mercado Financeiro | FM Fisioterapia e Saúde</header>
+  <h1>📊 Mercado Financeiro | FM Fisioterapia e Saúde</h1>
 
   <div class="content">
     <div>
@@ -99,9 +109,14 @@
     </div>
   </div>
 
-  <div class="marquee">
-    <span>Clínica FM Fisioterapia e Saúde - Saúde com propósito! &nbsp;|&nbsp; Clínica FM Fisioterapia e Saúde - Saúde com propósito!</span>
+  <footer>
+    FM Fisioterapia e Saúde – Saúde com propósito!
+  </footer>
+
+  <div id="footer-bar">
+    <div id="footer-text">Clínica FM Fisioterapia e Saúde - Saúde com propósito! &nbsp;&nbsp;&nbsp;&nbsp;</div>
   </div>
 </body>
 </html>
+
 
