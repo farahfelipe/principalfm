@@ -10,68 +10,73 @@
       color: #f8f9fa;
       font-family: "Segoe UI", sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 15px 10px 60px;
+      box-sizing: border-box;
     }
 
     h1 {
       text-align: center;
-      font-size: 2.5em;
+      font-size: 2.8em; /* um pouco maior para TV */
       color: #ffffff;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .content > div {
-      margin-bottom: 10px; /* espaço entre blocos menor */
+      margin-bottom: 8px;
     }
 
     h2 {
-      font-size: 1.4em;
+      font-size: 1.6em; /* fonte maior para TV */
       color: #38bdf8;
-      margin: 8px 0 4px 0;
+      margin: 8px 0 6px 0;
       text-align: center;
       border-bottom: 2px solid #38bdf8;
-      padding-bottom: 5px;
+      padding-bottom: 4px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 8px; /* menor gap entre iframes */
-      margin-top: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 6px;
+      margin-top: 6px;
       justify-items: center;
+      max-width: 100%;
     }
 
     iframe {
       width: 100%;
-      max-width: 360px;
-      height: 280px;
+      max-width: 320px; /* reduzido para 720p */
+      height: 270px;
       border: none;
       border-radius: 10px;
       background-color: #1e293b;
     }
 
     footer {
-      margin-top: 40px;
+      margin-top: 16px;
       text-align: center;
-      font-size: 1.2em;
+      font-size: 1.3em; /* fonte maior para rodapé */
       padding: 10px;
       background-color: #1e293b;
       color: #facc15;
       border-top: 2px solid #facc15;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Barra animada no rodapé */
     #footer-bar {
       position: fixed;
       bottom: 0;
       width: 100%;
       background-color: #1e293b;
       color: #facc15;
-      font-size: 1.1em;
+      font-size: 1.2em;
       padding: 8px 0;
       overflow: hidden;
       white-space: nowrap;
       box-sizing: border-box;
+      z-index: 10;
+      border-top: 2px solid #facc15;
     }
 
     #footer-text {
@@ -84,7 +89,6 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-
   </style>
 </head>
 <body>
